@@ -1,4 +1,6 @@
 package come.cos.securitybasic.model;
+
+
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -31,7 +33,6 @@ public class User {
     // OAuth를 위해 구성한 추가 필드 2개
     private String provider;
     private String providerId;
-    private Timestamp loginDate;
     @CreationTimestamp
     private Timestamp createDate;
 }

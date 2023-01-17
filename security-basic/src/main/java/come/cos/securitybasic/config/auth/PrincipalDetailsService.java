@@ -1,4 +1,4 @@
-package come.cos.securitybasic.auth;
+package come.cos.securitybasic.config.auth;
 
 import come.cos.securitybasic.model.User;
 import come.cos.securitybasic.repository.UserRepository;
@@ -9,20 +9,23 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 
-// 시큐리티 설정에서
 @Service
-public class PrincipalDetailsService implements UserDetailsService {
+public class PrincipalDetailsService implements UserDetailsService{
 
     @Autowired
     private UserRepository userRepository;
 
-    // 시큐리티 session <= Authentication <= UserDetail
+    // 함수 종료시 @AuthernticationPrincipal 어노테이션이 만들어진다
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User userEntity = userRepository.findByUsername(username);
-        if(userEntity != null) {
-            return new PrincipalDetails(userEntity);
+        User user = userRepository.findByUsername(username);
+        if(user == null) {
+            return null;
+        }else {
+            return new PrincipalDetails(user);
         }
-        return null;
+
     }
+
 }
