@@ -11,17 +11,17 @@ public class KakaoUserInfo implements OAuth2UserInfo{
 
     @Override
     public String getProviderId() {
-        return (String) attributes.get("id");
+        return  String.valueOf(attributes.get("id"));
     }
 
     @Override
     public String getName() {
-        return (String) attributes.get("profile_nickname");
+        return (String) ((Map) attributes.get("properties")).get("properties");
     }
 
     @Override
     public String getEmail() {
-        return (String) attributes.get("account_email");
+        return (String) ((Map) attributes.get("kakao_account")).get("email");
     }
 
     @Override
